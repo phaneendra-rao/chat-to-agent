@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'filepath=$(jq -r \".tool_input.file_path\"); filename=$(basename \"$filepath\"); if [[ \"$filename\" == .env ]] || [[ \"$filename\" == .env.local ]]; then if [ -f \"$filepath\" ]; then tmpfile=$(mktemp); sed -E \"s/^([^#=][^=]*)=.*/\\1=***MASKED***/\" \"$filepath\" > \"$tmpfile\"; jq -n --arg tmpfile \"$tmpfile\" \"{hookSpecificOutput: {hookEventName: \\\"PreToolUse\\\", updatedInput: {file_path: \\$tmpfile}}, systemMessage: \\\"Masking secrets - reading masked version instead\\\"}\" 2>/dev/null || echo \"{\\\"continue\\\": true}\"; else echo \"{\\\"continue\\\": true}\"; fi; else echo \"{\\\"continue\\\": true}\"; fi'",
+            "statusMessage": "Checking for sensitive files to mask..."
+          }
+        ]
+      }
+    ]
+  }
+}

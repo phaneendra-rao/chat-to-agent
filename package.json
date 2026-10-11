@@ -1,0 +1,23 @@
+{
+  "name": "chat-to-agent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@openrouter/ai-sdk-provider": "^3.1.0",
+    "ai": "^7.0.137",
+    "dotenv": "^18.0.7",
+    "zod": "^4.6.5"
+  }
+}
